@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-soft">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="#08080a" rx="80"/>
+
+  <!-- Subtle grid lines (design reference aesthetic) -->
+  <line x1="256" y1="110" x2="256" y2="402" stroke="#00F0FF" stroke-width="0.6" stroke-opacity="0.18"/>
+  <line x1="126" y1="170" x2="386" y2="170" stroke="#00F0FF" stroke-width="0.6" stroke-opacity="0.18"/>
+
+  <!-- Glow halo behind T -->
+  <rect x="126" y="148" width="260" height="44" rx="4" fill="#00F0FF" opacity="0.06" filter="url(#glow-soft)"/>
+  <rect x="228" y="148" width="56" height="224" rx="4" fill="#00F0FF" opacity="0.06" filter="url(#glow-soft)"/>
+
+  <!-- T crossbar -->
+  <rect x="126" y="148" width="260" height="44" rx="4" fill="none" stroke="#00F0FF" stroke-width="14" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- T stem -->
+  <rect x="228" y="192" width="56" height="180" rx="4" fill="none" stroke="#00F0FF" stroke-width="14" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Inner diagonal slash detail on crossbar (design precision marker) -->
+  <line x1="245" y1="155" x2="268" y2="185" stroke="#00F0FF" stroke-width="5" stroke-opacity="0.55" stroke-linecap="round"/>
+
+  <!-- Accent corner dots (grid anchors) -->
+  <circle cx="126" cy="148" r="5" fill="#00F0FF" opacity="0.7"/>
+  <circle cx="386" cy="148" r="5" fill="#00F0FF" opacity="0.7"/>
+  <circle cx="256" cy="372" r="5" fill="#00F0FF" opacity="0.5"/>
+</svg>
