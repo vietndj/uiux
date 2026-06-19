@@ -22,6 +22,12 @@ if (path === "/checkout") {
       createElement(ThemeProvider, null, createElement(Editor))
     );
   });
+} else if (path === "/uiux") {
+  import("./UiuxApp").then(({ default: UiuxApp }) => {
+    createRoot(document.getElementById("root")!).render(
+      createElement(UiuxApp)
+    );
+  });
 } else {
   import("./App").then(({ default: App }) => {
     createRoot(document.getElementById("root")!).render(

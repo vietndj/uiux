@@ -27,9 +27,9 @@ function viTimestamp() {
   return new Date().toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
 }
 
-// ─── In-memory customer cache (phone → { name, email }) ───────────────────────
+// ─── In-memory customer cache (phone → { name, email, campaign }) ──────────────
 // Survives within the same server process; sufficient for the registration→payment flow
-const customerCache = new Map<string, { name: string; email: string }>();
+const customerCache = new Map<string, { name: string; email: string; campaign: string }>();
 
 // ─── GET /api/payment/bank-info ───────────────────────────────────────────────
 router.get("/payment/bank-info", (_req, res) => {
@@ -45,18 +45,24 @@ router.get("/payment/bank-info", (_req, res) => {
 // ─── POST /api/lead/register ──────────────────────────────────────────────────
 router.post("/lead/register", async (req, res) => {
   try {
-    const { name = "", phone = "", email = "", url = "" } = req.body as {
+    const { name = "", phone = "", email = "", url = "", campaign = "typography" } = req.body as {
       name?: string;
       phone?: string;
       email?: string;
       url?: string;
+      campaign?: string;
     };
+
+    // Resolve Google Sheet tab name based on campaign
+    // campaign "uiux_book" → sheetName "Landing_UIUX_Book"
+    // campaign "typography" (default) → sheetName undefined (Apps Script uses default sheet)
+    const sheetName = campaign === "uiux_book" ? "Landing_UIUX_Book" : undefined;
 
     // Cache customer info keyed by normalized phone so webhook can look it up later
     if (phone) {
       const normalizedPhone = phone.replace(/[\s\-]/g, '');
-      customerCache.set(normalizedPhone, { name, email });
-      req.log.info({ phone: normalizedPhone }, "Customer info cached");
+      customerCache.set(normalizedPhone, { name, email, campaign });
+      req.log.info({ phone: normalizedPhone, campaign }, "Customer info cached");
     }
 
     if (!GOOGLE_SCRIPT_URL) {
@@ -65,9 +71,10 @@ router.post("/lead/register", async (req, res) => {
       return;
     }
 
-    const payload = {
+    const payload: Record<string, unknown> = {
       action: "append",
-      values: [viTimestamp(), name, `'${phone}`, email, url, "chưa thanh toán"]
+      values: [viTimestamp(), name, `'${phone}`, email, url, "chưa thanh toán"],
+      ...(sheetName ? { sheetName } : {}),
     };
 
     // Fire and forget: don't wait for Google Sheets to finish, to make UI instantly responsive!
@@ -78,7 +85,7 @@ router.post("/lead/register", async (req, res) => {
     })
     .then(async (res) => {
       if (!res.ok) throw new Error(`Google Script failed with status ${res.status}`);
-      req.log.info({ name, phone }, "Lead registered to sheet via Google Script (async)");
+      req.log.info({ name, phone, campaign }, "Lead registered to sheet via Google Script (async)");
     })
     .catch((err) => {
       req.log.error(err, "Background task: Error saving lead to Google Sheets");
@@ -209,7 +216,9 @@ router.post("/payment/confirm", async (req, res) => {
           name: customerName,
           email: customerEmail,
           phone: phone,
-          course: "Typography Masterclass"
+          course: "Typography Masterclass",
+          campaign: "typography",
+          sheetName: undefined, // default sheet
         })
       }).catch(err => req.log.error(err, "Failed to call Make webhook"));
     }
@@ -269,11 +278,14 @@ router.post("/sepay/webhook", async (req, res) => {
         
         // Look up customer info: prefer Google Sheet response, fall back to in-memory cache
         const cached = customerCache.get(extractedPhone);
-        const emailToSend = updateData.email || cached?.email || "";
-        const nameToSend = updateData.name || cached?.name || "Học viên";
+        const emailToSend = (updateData as any).email || cached?.email || "";
+        const nameToSend = (updateData as any).name || cached?.name || "Học viên";
+        // Determine campaign from cached data (set at registration time)
+        const cachedCampaign = cached?.campaign || "typography";
+        const sheetNameForMake = cachedCampaign === "uiux_book" ? "Landing_UIUX_Book" : undefined;
 
         if (emailToSend) {
-          req.log.info({ email: emailToSend }, "Triggering Make.com webhook from SePay Webhook...");
+          req.log.info({ email: emailToSend, campaign: cachedCampaign }, "Triggering Make.com webhook from SePay Webhook...");
           fetch(MAKE_WEBHOOK_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -281,7 +293,9 @@ router.post("/sepay/webhook", async (req, res) => {
               name: nameToSend,
               email: emailToSend,
               phone: extractedPhone,
-              course: "Typography Masterclass"
+              course: cachedCampaign === "uiux_book" ? "UIUX Practical Book" : "Typography Masterclass",
+              campaign: cachedCampaign,
+              ...(sheetNameForMake ? { sheetName: sheetNameForMake } : {}),
             })
           }).catch(err => req.log.error(err, "Failed to call Make webhook from SePay webhook"));
         } else {
