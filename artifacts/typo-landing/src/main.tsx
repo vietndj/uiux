@@ -28,6 +28,12 @@ if (path === "/checkout") {
       createElement(UiuxApp)
     );
   });
+} else if (path === "/uiux-editor") {
+  import("./UiuxEditor").then(({ default: UiuxEditor }) => {
+    createRoot(document.getElementById("root")!).render(
+      createElement(UiuxEditor)
+    );
+  });
 } else {
   import("./App").then(({ default: App }) => {
     createRoot(document.getElementById("root")!).render(
