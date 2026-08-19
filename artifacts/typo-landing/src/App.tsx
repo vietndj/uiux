@@ -590,7 +590,7 @@ export default function App() {
                 Được dàn trang với tiêu chuẩn khắt khe nhất về hệ thống lưới (Grid). Bóc tách trọn vẹn đặc tính của 4 dòng font huyết mạch và phân tích Case Study. Đọc mượt mà trên mọi thiết bị.
               </p>
             </div>
-            <img src="/book-preview.gif" alt="Ebook Preview" style={{ width: "100%", display: "block", borderTop: `1px solid ${t.line}` }} />
+            <img src="https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/book-preview.gif" alt="Ebook Preview" style={{ width: "100%", display: "block", borderTop: `1px solid ${t.line}` }} />
           </div>
 
           {/* Col 2 — Video */}
@@ -607,7 +607,7 @@ export default function App() {
                 Hệ thống hóa trên nền tảng Skool chuyên nghiệp. Từng video là một "ca phẫu thuật" chữ viết. Xem lại mọi lúc, tra cứu thao tác mọi nơi để áp dụng ngay lập tức vào dự án đang thực hiện. Mua 1 lần, sở hữu công cụ làm nghề trọn đời.
               </p>
             </div>
-            <img src="/video-preview2.gif" alt="Video Course Preview" style={{ width: "100%", display: "block", borderTop: `1px solid ${t.line}` }} />
+            <img src="https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/video-preview2.gif" alt="Video Course Preview" style={{ width: "100%", display: "block", borderTop: `1px solid ${t.line}` }} />
           </div>
         </div>
       </section>

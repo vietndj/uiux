@@ -86,7 +86,7 @@
   "roadmapPreviewHeading": "Trải nghiệm trực quan không gian bên trong ấn phẩm",
   "roadmapPreviewDesc": "Mời bạn đọc thử 1 phần chương 6 - Font preview.",
   "productsEbookEmbed": "https://heyzine.com/flip-book/38fd95cbdc.html",
-  "productsVideoGif": "/video-preview2.gif",
+  "productsVideoGif": "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/video-preview2.gif",
   "roadmapIframeUrl": "https://heyzine.com/flip-book/38fd95cbdc.html",
   "roadmapChaptersHeading": "Hệ thống hóa toàn bộ tư duy thiết kế của bạn:",
   "roadmapChaptersGif": "",
@@ -96,21 +96,21 @@
       "title": "Nền Tảng Cội Nguồn",
       "sub": "Bóc tách 4 dòng Typeface cốt lõi",
       "desc": "Hiểu rõ sự uy quyền của Serif, tính công năng của Sans-Serif, sự chính xác của Monospace và nét tự nhiên của Script.",
-      "gif": "/uploads/1781866117735_book_1_serif_.gif"
+      "gif": "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/1781866117735_book_1_serif_.gif"
     },
     {
       "n": "Chương 5",
       "title": "Giải Mã Brief & Năng Lượng Chữ",
       "sub": "Phân tích tính cách thương hiệu",
       "desc": "Biết cách lên khung logic thiết kế ngay khi vừa đọc yêu cầu của khách hàng dựa trên lịch sử font chữ.",
-      "gif": "/uploads/1781866121914_07_logic_1.gif"
+      "gif": "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/1781866121914_07_logic_1.gif"
     },
     {
       "n": "Chương 6–7",
       "title": "Bản Đồ Quyết Định",
       "sub": "Quy trình lọc font nhanh chóng",
       "desc": "Rút ngắn thời gian chọn font từ 3 tiếng xuống còn 5 phút nhờ nắm vững quy tắc phối cặp (Font Pairing) cho 10 ngành hàng.",
-      "gif": "/uploads/1781866129697_07_logic_2.gif"
+      "gif": "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/1781866129697_07_logic_2.gif"
     },
     {
       "n": "Chương 8",

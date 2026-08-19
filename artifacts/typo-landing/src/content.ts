@@ -243,7 +243,7 @@ export const DEFAULT_CONTENT: PageContent = {
   roadmapPreviewHeading: "Trải nghiệm trực quan không gian bên trong ấn phẩm",
   roadmapPreviewDesc: "Mời bạn đọc thử 1 phần chương 6 - Font preview.",
   productsEbookEmbed: "https://heyzine.com/flip-book/38fd95cbdc.html",
-  productsVideoGif: "/video-preview2.gif",
+  productsVideoGif: "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/video-preview2.gif",
 
   roadmapIframeUrl: "https://heyzine.com/flip-book/38fd95cbdc.html",
   roadmapChaptersHeading: "Hệ thống hóa toàn bộ tư duy thiết kế của bạn:",

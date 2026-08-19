@@ -692,7 +692,7 @@ function HeroEdit({ c, uc, t }: { c: PageContent; uc: (p: Partial<PageContent>) 
             </p>
           </div>
           {/* GIF ebook — App.tsx hardcodes /book-preview.gif */}
-          <img src="/book-preview.gif" alt="Ebook Preview"
+          <img src="https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/book-preview.gif" alt="Ebook Preview"
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
             style={{ width: "100%", display: "block", borderTop: `1px solid ${t.line}` }} />
         </div>
@@ -710,7 +710,7 @@ function HeroEdit({ c, uc, t }: { c: PageContent; uc: (p: Partial<PageContent>) 
               Hệ thống hóa trên nền tảng Skool chuyên nghiệp. Từng video là một "ca phẫu thuật" chữ viết. Xem lại mọi lúc, tra cứu mọi nơi.
             </p>
           </div>
-          <img src={c.productsVideoGif ?? "/video-preview2.gif"} alt="Video Preview"
+          <img src={c.productsVideoGif ?? "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/video-preview2.gif"} alt="Video Preview"
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
             style={{ width: "100%", display: "block", borderTop: `1px solid ${t.line}` }} />
         </div>
@@ -908,9 +908,9 @@ function ProductsEdit({ c, uc, t }: { c: PageContent; uc: (p: Partial<PageConten
             {i === 1 && (
               <div style={{ borderTop: `1px solid ${t.line}` }}>
                 {/* GIF preview */}
-                {(c.productsVideoGif ?? "/video-preview2.gif") && (
+                {(c.productsVideoGif ?? "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/video-preview2.gif") && (
                   <img
-                    src={c.productsVideoGif ?? "/video-preview2.gif"}
+                    src={c.productsVideoGif ?? "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/video-preview2.gif"}
                     alt="Video Preview"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                     style={{ width: "100%", display: "block" }}
@@ -919,7 +919,7 @@ function ProductsEdit({ c, uc, t }: { c: PageContent; uc: (p: Partial<PageConten
                 {/* Upload field */}
                 <div style={{ padding: "0 16px 16px" }}>
                   <ImageUploadField
-                    value={c.productsVideoGif ?? "/video-preview2.gif"}
+                    value={c.productsVideoGif ?? "https://pub-447bd44dfdac4938912655c855b8631c.r2.dev/landing/video-preview2.gif"}
                     onChange={(v) => uc({ productsVideoGif: v })}
                     label="GIF / ẢNH MINH HỌA VIDEO"
                     accent={t.accent}
